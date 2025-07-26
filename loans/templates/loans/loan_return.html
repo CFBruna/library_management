@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <h3 class="display-6">Registrar Devolução</h3>
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Tem certeza que deseja registrar a devolução do livro: <strong>{{ object.book.title }} emprestado para {{ object.patron.name }}</strong>?</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success mt-3">Registrar Devolução</button>
+                </form>
+                
+            </div>
+            
+        </div>
+        <a href="{% url 'loan-list' %}" class="btn btn-secondary mt-3 float-end">Cancelar e Voltar para a Lista de Empréstimos</a>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Livro: {{ object.title }}{% endblock %}
+
+{% block content %}
+<h4 class="mb-4">{{ object.title }} (ISBN: {{ object.isbn }})</h4>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p class="card-text"><strong>Autor(es):</strong>
+            {% for author in object.author.all %}
+                {{ author.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                Nenhum autor
+            {% endfor %}
+        </p>
+        <p class="card-text"><strong>Categoria:</strong> {{ object.category.name }}</p>
+        <p class="card-text"><strong>Páginas:</strong> {{ object.page_count }}</p>
+        <p class="card-text"><strong>Quantidade em estoque:</strong> {{ object.quantity }}</p>
+        <p class="card-text"><strong>Descrição:</strong> {{ object.description|default:"Nenhuma descrição disponível." }}</p>
+
+        <a href="{% url 'book-list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
+    </div>
+</div>
+{% endblock %}

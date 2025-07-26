@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Leitores
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="get" action="{% url 'patron-list' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Nome ou CPF" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+    <a href="{% url 'patron-create' %}" class="btn btn-success float-end">
+        <i class="bi bi-plus"></i> Novo Leitor
+    </a>
+    </div>
+
+</div>
+
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Celular</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patron in patrons %}
+                <tr>
+                    <td>{{ patron.id }}</td>
+                    <td>{{ patron.name }}</td>
+                    <td>{{ patron.phone_number }}</td>
+                    <td>{{ patron.email }}</td>
+                    <td>{{ patron.cpf }}</td>
+                    <td>
+                            <a href="{% url 'patron-detail' patron.id %}" class="btn btn-info btn-sm">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                             <a href="{% url 'patron-update' patron.id %}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'patron-delete' patron.id %}" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

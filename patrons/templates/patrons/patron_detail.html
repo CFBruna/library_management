@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Leitor: {{ object.title }}{% endblock %}
+
+{% block content %}
+<h4 class="mb-4">{{ object.name }} (CPF: {{ object.cpf }})</h4>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p class="card-text"><strong>Nome:</strong> {{ object.name }}</p>
+        <p class="card-text"><strong>Celular:</strong> {{ object.phone_number }}</p>
+        <p class="card-text"><strong>Email:</strong> {{ object.email }}</p>
+        <p class="card-text"><strong>CPF:</strong> {{ object.cpf }}</p>
+        <p class="card-text"><strong>Endereço:</strong> {{ object.address }}</p>
+        <p class="card-text"><strong>Descrição:</strong> {{ object.description|default:"Nenhuma descrição disponível." }}</p>
+
+        <a href="{% url 'patron-list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
+    </div>
+</div>
+{% endblock %}

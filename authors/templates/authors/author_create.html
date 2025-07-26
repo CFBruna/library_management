@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3 class="display-6">Cadastrar Autor(a)</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" class="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Salvar Autor(a)</button>
+            </form>
+        </div>
+    </div>
+    <a href="{% url 'author-list' %}" class="btn btn-secondary mt-3 float-end">Cancelar e Voltar para a Lista de Autores</a>
+</div>
+
+{% endblock %}

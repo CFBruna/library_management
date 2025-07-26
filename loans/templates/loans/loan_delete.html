@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <h3 class="display-6">Deletar Empréstimo</h3>
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Tem certeza que deseja deletar o Empréstimo <strong>{{ object.book }} para {{ object.patron.name }}</strong>?</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger mt-3">Deletar</button>
+                </form>
+                
+            </div>
+            
+        </div>
+        <a href="{% url 'loan-list' %}" class="btn btn-secondary mt-3 float-end">Cancelar e Voltar para a Lista de Empréstimos</a>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Empréstimo: {{ object.book }}{% endblock %}
+
+{% block content %}
+<h4 class="mb-4">{{ object.book }}</h4>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p class="card-text"><strong>Leitor:</strong> {{ object.patron.name }}</p>
+        <p class="card-text"><strong>CPF:</strong> {{ object.patron.cpf }}</p>
+        <p class="card-text"><strong>Celular:</strong> {{ object.patron.phone_number }}</p>
+        <p class="card-text"><strong>Data do Empréstimo:</strong> {{ object.loan_date }}</p>
+        <p class="card-text"><strong>Data Prevista para Devolução:</strong> {{ object.due_date }}</p>
+        <p class="card-text"><strong>Devolvido:</strong> {% if loan.is_returned %}Sim{% else %}Não{% endif %}</p>
+        <p class="card-text"><strong>Observações:</strong> {{ object.notes|default:"Nenhuma observação disponível." }}</p>
+
+        <a href="{% url 'loan-returned-list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
+    </div>
+</div>
+{% endblock %}

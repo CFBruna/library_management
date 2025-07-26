@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 88
+exclude = [
+    ".git",
+    ".venv",
+    "migrations",
+]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "DJ"]
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"

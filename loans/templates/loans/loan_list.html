@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Empréstimos
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="get" action="{% url 'loan-list' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Livro ou Leitor" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+    <a href="{% url 'loan-create' %}" class="btn btn-success float-end">
+        <i class="bi bi-plus"></i> Novo Empréstimo
+    </a>
+    <a href="{% url 'loan-returned-list' %}" class="btn btn-outline-primary mb-3">Ver Livros Devolvidos</a>
+    </div>
+
+</div>
+
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Livro</th>
+                <th>Leitor</th>
+                <th>CPF</th>
+                <th>Data de Empréstimo</th>
+                <th>Data Prevista de Devolução</th>
+                <th>Devolvido</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans %}
+                <tr>
+                    <td>{{ loan.id }}</td>
+                    <td>{{ loan.book.title}}</td>
+                    <td>{{ loan.patron.name }}</td>
+                    <td>{{ loan.patron.cpf }}</td>
+                    <td>{{ loan.loan_date }}</td>
+                    <td>{{ loan.due_date }}</td>
+                    <td>{% if loan.is_returned %}Sim{% else %}Não{% endif %}</td>
+                    <td>
+                            <a href="{% url 'loan-detail' loan.id %}" class="btn btn-info btn-sm">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                             <a href="{% url 'loan-update' loan.id %}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'loan-return' loan.id %}" class="btn btn-success btn-sm">Devolver</a>
+                            
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
