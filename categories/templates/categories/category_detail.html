@@ -9,7 +9,7 @@
     <div class="card-body">
         <p class="card-text"><strong>Descrição:</strong> {{ object.description|default:"Nenhuma descrição disponível." }}</p>
 
-        <a href="{% url 'category-list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
+        <a href="{% url 'categories:list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
     </div>
 </div>
 {% endblock %}

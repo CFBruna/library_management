@@ -8,7 +8,7 @@ Autores
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <form method="get" action="{% url 'author-list' %}">
+        <form method="get" action="{% url 'authors:list' %}">
             <div class="input-group">
                 <input type="text" class="form-control" name="name" placeholder="Nome" value="{{ request.GET.name }}">
                 <button type="submit" class="btn btn-primary">
@@ -19,7 +19,7 @@ Autores
     </div>
 
     <div class="col-md-6">
-    <a href="{% url 'author-create' %}" class="btn btn-success float-end">
+    <a href="{% url 'authors:create' %}" class="btn btn-success float-end">
         <i class="bi bi-plus"></i> Novo(a) Autor(a)
     </a>
     </div>
@@ -45,13 +45,13 @@ Autores
                     <td>{{ author.name }}</td>
                     <td>{{ author.description }}</td>
                     <td>
-                            <a href="{% url 'author-detail' author.id %}" class="btn btn-info btn-sm">
+                            <a href="{% url 'authors:detail' author.id %}" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
-                             <a href="{% url 'author-update' author.id %}" class="btn btn-warning btn-sm">
+                             <a href="{% url 'authors:update' author.id %}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <a href="{% url 'author-delete' author.id %}" class="btn btn-danger btn-sm">
+                            <a href="{% url 'authors:delete' author.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash3"></i>
                             </a>
                         

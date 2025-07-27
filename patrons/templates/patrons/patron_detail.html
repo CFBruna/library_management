@@ -14,7 +14,7 @@
         <p class="card-text"><strong>Endereço:</strong> {{ object.address }}</p>
         <p class="card-text"><strong>Descrição:</strong> {{ object.description|default:"Nenhuma descrição disponível." }}</p>
 
-        <a href="{% url 'patron-list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
+        <a href="{% url 'patrons:list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
     </div>
 </div>
 {% endblock %}

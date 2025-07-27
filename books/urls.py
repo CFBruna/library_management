@@ -2,22 +2,24 @@ from django.urls import path
 
 from . import views
 
+app_name = "books"
+
 urlpatterns = [
-    path("books/list/", views.BookListView.as_view(), name="book-list"),
+    path("list/", views.BookListView.as_view(), name="list"),
     path(
-        "books/<int:pk>/detail/",
+        "<int:pk>/detail/",
         views.BookDetailView.as_view(),
-        name="book-detail",
+        name="detail",
     ),
-    path("books/create/", views.BookCreateView.as_view(), name="book-create"),
+    path("create/", views.BookCreateView.as_view(), name="create"),
     path(
-        "books/<int:pk>/update",
+        "<int:pk>/update/",
         views.BookUpdateView.as_view(),
-        name="book-update",
+        name="update",
     ),
     path(
-        "books/<int:pk>/delete/",
+        "<int:pk>/delete/",
         views.BookDeleteView.as_view(),
-        name="book-delete",
+        name="delete",
     ),
 ]

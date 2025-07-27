@@ -4,7 +4,7 @@
  <h6 class="display-6">Livros Já Devolvidos</h6>
 <div class="row mb-3">
     <div class="col-md-6">
-        <form method="get" action="{% url 'loan-returned-list' %}">
+        <form method="get" action="{% url 'loans:returned-list' %}">
             <div class="input-group">
                 <input type="text" class="form-control" name="q" placeholder="Livro ou Leitor" value="{{ request.GET.q }}">
                 <button type="submit" class="btn btn-primary">
@@ -41,7 +41,7 @@
                     <td>{{ loan.return_date }}</td>
                     <td>{{ loan.notes }}</td>
                     <td>
-                            <a href="{% url 'loan-returned-detail' loan.id %}" class="btn btn-info btn-sm">
+                            <a href="{% url 'loans:returned-detail' loan.id %}" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
                     </td>
@@ -54,6 +54,6 @@
             </tbody>
         </table>
     </div>
-    <a href="{% url 'loan-list' %}" class="btn btn-secondary mt-3 float-end">Voltar para Empréstimos Ativos</a>
+    <a href="{% url 'loans:list' %}" class="btn btn-secondary mt-3 float-end">Voltar para Empréstimos Ativos</a>
 
 {% endblock %}

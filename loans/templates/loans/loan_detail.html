@@ -15,7 +15,7 @@
         <p class="card-text"><strong>Devolvido:</strong> {% if loan.is_returned %}Sim{% else %}Não{% endif %}</p>
         <p class="card-text"><strong>Observações:</strong> {{ object.notes|default:"Nenhuma observação disponível." }}</p>
 
-        <a href="{% url 'loan-list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
+        <a href="{% url 'loans:list' %}" class="btn btn-secondary mt-3">Voltar para a lista</a>
     </div>
 </div>
 {% endblock %}

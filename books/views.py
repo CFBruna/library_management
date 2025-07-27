@@ -40,7 +40,7 @@ class BookCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Book
     template_name = "books/book_create.html"
     form_class = forms.BookForm
-    success_url = reverse_lazy("book-list")
+    success_url = reverse_lazy("books:list")
     permission_required = "books.add_book"
 
 
@@ -48,12 +48,12 @@ class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = models.Book
     template_name = "books/book_update.html"
     form_class = forms.BookForm
-    success_url = reverse_lazy("book-list")
+    success_url = reverse_lazy("books:list")
     permission_required = "books.change_book"
 
 
 class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = models.Book
     template_name = "books/book_delete.html"
-    success_url = reverse_lazy("book-list")
+    success_url = reverse_lazy("books:list")
     permission_required = "books.delete_book"

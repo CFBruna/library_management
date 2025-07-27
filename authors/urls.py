@@ -2,26 +2,28 @@ from django.urls import path
 
 from . import views
 
+app_name = "authors"
+
 urlpatterns = [
-    path("authors/list/", views.AuthorListView.as_view(), name="author-list"),
+    path("list/", views.AuthorListView.as_view(), name="list"),
     path(
-        "authors/<int:pk>/detail/",
+        "<int:pk>/detail/",
         views.AuthorDetailView.as_view(),
-        name="author-detail",
+        name="detail",
     ),
     path(
-        "authors/create/",
+        "create/",
         views.AuthorCreateView.as_view(),
-        name="author-create",
+        name="create",
     ),
     path(
-        "authors/<int:pk>/update/",
+        "<int:pk>/update/",
         views.AuthorUpdateView.as_view(),
-        name="author-update",
+        name="update",
     ),
     path(
-        "authors/<int:pk>/delete/",
+        "<int:pk>/delete/",
         views.AuthorDeleteView.as_view(),
-        name="author-delete",
+        name="delete",
     ),
 ]

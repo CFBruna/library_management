@@ -419,7 +419,7 @@
     {% if user.is_authenticated %}
     <header class="header">
         <div class="header-container">
-            <a href="{% url 'book-list' %}" class="brand">
+            <a href="{% url 'books:list' %}" class="brand">
                 <div class="brand-icon">
                     <i class="bi bi-book"></i>
                 </div>
@@ -427,23 +427,23 @@
             </a>
 
             <nav class="nav-desktop">
-                <a href="{% url 'book-list' %}" class="nav-link" data-page="books">
+                <a href="{% url 'books:list' %}" class="nav-link" data-page="books">
                     <i class="bi bi-book"></i>
                     <span>Livros</span>
                 </a>
-                <a href="{% url 'author-list' %}" class="nav-link" data-page="authors">
+                <a href="{% url 'authors:list' %}" class="nav-link" data-page="authors">
                     <i class="bi bi-person-badge"></i>
                     <span>Autores</span>
                 </a>
-                <a href="{% url 'category-list' %}" class="nav-link" data-page="categories">
+                <a href="{% url 'categories:list' %}" class="nav-link" data-page="categories">
                     <i class="bi bi-tags"></i>
                     <span>Categorias</span>
                 </a>
-                <a href="{% url 'patron-list' %}" class="nav-link" data-page="patrons">
+                <a href="{% url 'patrons:list' %}" class="nav-link" data-page="patrons">
                     <i class="bi bi-people"></i>
                     <span>Leitores</span>
                 </a>
-                <a href="{% url 'loan-list' %}" class="nav-link" data-page="loans">
+                <a href="{% url 'loans:list' %}" class="nav-link" data-page="loans">
                     <i class="bi bi-arrow-left-right"></i>
                     <span>Empréstimos</span>
                 </a>
@@ -489,15 +489,15 @@
             <div class="mobile-nav-section">
                 <div class="mobile-nav-title">Catálogo</div>
                 <div class="mobile-nav-links">
-                    <a href="{% url 'book-list' %}" class="mobile-nav-link" data-page="books">
+                    <a href="{% url 'books:list' %}" class="mobile-nav-link" data-page="books">
                         <i class="bi bi-book"></i>
                         <span>Livros</span>
                     </a>
-                    <a href="{% url 'author-list' %}" class="mobile-nav-link" data-page="authors">
+                    <a href="{% url 'authors:list' %}" class="mobile-nav-link" data-page="authors">
                         <i class="bi bi-person-badge"></i>
                         <span>Autores</span>
                     </a>
-                    <a href="{% url 'category-list' %}" class="mobile-nav-link" data-page="categories">
+                    <a href="{% url 'categories:list' %}" class="mobile-nav-link" data-page="categories">
                         <i class="bi bi-tags"></i>
                         <span>Categorias</span>
                     </a>
@@ -507,11 +507,11 @@
             <div class="mobile-nav-section">
                 <div class="mobile-nav-title">Gerenciamento</div>
                 <div class="mobile-nav-links">
-                    <a href="{% url 'patron-list' %}" class="mobile-nav-link" data-page="patrons">
+                    <a href="{% url 'patrons:list' %}" class="mobile-nav-link" data-page="patrons">
                         <i class="bi bi-people"></i>
                         <span>Leitores</span>
                     </a>
-                    <a href="{% url 'loan-list' %}" class="mobile-nav-link" data-page="loans">
+                    <a href="{% url 'loans:list' %}" class="mobile-nav-link" data-page="loans">
                         <i class="bi bi-arrow-left-right"></i>
                         <span>Empréstimos</span>
                     </a>

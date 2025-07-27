@@ -31,7 +31,7 @@ class AuthorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Author
     template_name = "authors/author_create.html"
     form_class = forms.AuthorForm
-    success_url = reverse_lazy("author-list")
+    success_url = reverse_lazy("authors:list")
     permission_required = "authors.add_author"
 
 
@@ -45,12 +45,12 @@ class AuthorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = models.Author
     template_name = "authors/author_update.html"
     form_class = forms.AuthorForm
-    success_url = reverse_lazy("author-list")
+    success_url = reverse_lazy("authors:list")
     permission_required = "authors.change_author"
 
 
 class AuthorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = models.Author
     template_name = "authors/author_delete.html"
-    success_url = reverse_lazy("author-list")
+    success_url = reverse_lazy("authors:list")
     permission_required = "authors.delete_author"

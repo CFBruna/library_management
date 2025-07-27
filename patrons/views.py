@@ -40,7 +40,7 @@ class PatronCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Patron
     template_name = "patrons/patron_create.html"
     form_class = forms.PatronForm
-    success_url = reverse_lazy("patron-list")
+    success_url = reverse_lazy("patrons:list")
     permission_required = "patrons.add_patron"
 
 
@@ -48,12 +48,12 @@ class PatronUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = models.Patron
     template_name = "patrons/patron_update.html"
     form_class = forms.PatronForm
-    success_url = reverse_lazy("patron-list")
+    success_url = reverse_lazy("patrons:list")
     permission_required = "patrons.change_patron"
 
 
 class PatronDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = models.Patron
     template_name = "patrons/patron_delete.html"
-    success_url = reverse_lazy("patron-list")
+    success_url = reverse_lazy("patrons:list")
     permission_required = "patrons.delete_patron"

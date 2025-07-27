@@ -2,26 +2,28 @@ from django.urls import path
 
 from . import views
 
+app_name = "patrons"
+
 urlpatterns = [
-    path("patrons/list/", views.PatronListView.as_view(), name="patron-list"),
+    path("list/", views.PatronListView.as_view(), name="list"),
     path(
-        "patrons/<int:pk>/detail/",
+        "<int:pk>/detail/",
         views.PatronDetailView.as_view(),
-        name="patron-detail",
+        name="detail",
     ),
     path(
-        "patrons/create/",
+        "create/",
         views.PatronCreateView.as_view(),
-        name="patron-create",
+        name="create",
     ),
     path(
-        "patrons/<int:pk>/update/",
+        "<int:pk>/update/",
         views.PatronUpdateView.as_view(),
-        name="patron-update",
+        name="update",
     ),
     path(
-        "patrons/<int:pk>/delete/",
+        "<int:pk>/delete/",
         views.PatronDeleteView.as_view(),
-        name="patron-delete",
+        name="delete",
     ),
 ]

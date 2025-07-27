@@ -8,7 +8,7 @@ Categorias
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <form method="get" action="{% url 'category-list' %}">
+        <form method="get" action="{% url 'categories:list' %}">
             <div class="input-group">
                 <input type="text" class="form-control" name="name" placeholder="Nome" value="{{ request.GET.name }}">
                 <button type="submit" class="btn btn-primary">
@@ -19,7 +19,7 @@ Categorias
     </div>
 
     <div class="col-md-6">
-    <a href="{% url 'category-create' %}" class="btn btn-success float-end">
+    <a href="{% url 'categories:create' %}" class="btn btn-success float-end">
         <i class="bi bi-plus"></i> Nova Categoria
     </a>
     </div>
@@ -45,13 +45,13 @@ Categorias
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
                     <td>
-                            <a href="{% url 'category-detail' category.id %}" class="btn btn-info btn-sm">
+                            <a href="{% url 'categories:detail' category.id %}" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
-                             <a href="{% url 'category-update' category.id %}" class="btn btn-warning btn-sm">
+                             <a href="{% url 'categories:update' category.id %}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <a href="{% url 'category-delete' category.id %}" class="btn btn-danger btn-sm">
+                            <a href="{% url 'categories:delete' category.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash3"></i>
                             </a>
                         

@@ -8,7 +8,7 @@ Leitores
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <form method="get" action="{% url 'patron-list' %}">
+        <form method="get" action="{% url 'patrons:list' %}">
             <div class="input-group">
                 <input type="text" class="form-control" name="q" placeholder="Nome ou CPF" value="{{ request.GET.q }}">
                 <button type="submit" class="btn btn-primary">
@@ -19,7 +19,7 @@ Leitores
     </div>
 
     <div class="col-md-6">
-    <a href="{% url 'patron-create' %}" class="btn btn-success float-end">
+    <a href="{% url 'patrons:create' %}" class="btn btn-success float-end">
         <i class="bi bi-plus"></i> Novo Leitor
     </a>
     </div>
@@ -49,13 +49,13 @@ Leitores
                     <td>{{ patron.email }}</td>
                     <td>{{ patron.cpf }}</td>
                     <td>
-                            <a href="{% url 'patron-detail' patron.id %}" class="btn btn-info btn-sm">
+                            <a href="{% url 'patrons:detail' patron.id %}" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
-                             <a href="{% url 'patron-update' patron.id %}" class="btn btn-warning btn-sm">
+                             <a href="{% url 'patrons:update' patron.id %}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <a href="{% url 'patron-delete' patron.id %}" class="btn btn-danger btn-sm">
+                            <a href="{% url 'patrons:delete' patron.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash3"></i>
                             </a>
                         

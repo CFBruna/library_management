@@ -9,7 +9,7 @@
     <div class="card-body">
         <p class="card-text"><strong>Descrição:</strong> {{ object.description|default:"Nenhuma descrição disponível." }}</p>
 
-        <a href="{% url 'author-list' %}" class="btn btn-secondary mt-3">Voltar para a lista de Autores</a>
+        <a href="{% url 'authors:list' %}" class="btn btn-secondary mt-3">Voltar para a lista de Autores</a>
     </div>
 </div>
 {% endblock %}

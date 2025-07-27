@@ -2,30 +2,32 @@ from django.urls import path
 
 from . import views
 
+app_name = "categories"
+
 urlpatterns = [
     path(
-        "categories/list/",
+        "list/",
         views.CategoryListView.as_view(),
-        name="category-list",
+        name="list",
     ),
     path(
-        "categories/<int:pk>/detail/",
+        "<int:pk>/detail/",
         views.CategoryDetailView.as_view(),
-        name="category-detail",
+        name="detail",
     ),
     path(
-        "categories/create/",
+        "create/",
         views.CategoryCreateView.as_view(),
-        name="category-create",
+        name="create",
     ),
     path(
-        "categories/<int:pk>/update/",
+        "<int:pk>/update/",
         views.CategoryUpdateView.as_view(),
-        name="category-update",
+        name="update",
     ),
     path(
-        "categories/<int:pk>/delete/",
+        "<int:pk>/delete/",
         views.CategoryDeleteView.as_view(),
-        name="category-delete",
+        name="delete",
     ),
 ]

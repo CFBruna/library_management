@@ -37,7 +37,7 @@ class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
     model = models.Category
     template_name = "categories/category_create.html"
     form_class = forms.CategoryForm
-    success_url = reverse_lazy("category-list")
+    success_url = reverse_lazy("categories:list")
     permission_required = "categories.add_category"
 
 
@@ -45,12 +45,12 @@ class CategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
     model = models.Category
     template_name = "categories/category_update.html"
     form_class = forms.CategoryForm
-    success_url = reverse_lazy("category-list")
+    success_url = reverse_lazy("categories:list")
     permission_required = "categories.change_category"
 
 
 class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = models.Category
     template_name = "categories/category_delete.html"
-    success_url = reverse_lazy("category-list")
+    success_url = reverse_lazy("categories:list")
     permission_required = "categories.delete_category"

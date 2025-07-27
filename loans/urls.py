@@ -2,37 +2,39 @@ from django.urls import path
 
 from . import views
 
+app_name = "loans"
+
 urlpatterns = [
-    path("loans/list/", views.LoanListView.as_view(), name="loan-list"),
+    path("list/", views.LoanListView.as_view(), name="list"),
     path(
-        "loans/<int:pk>/detail/",
+        "<int:pk>/detail/",
         views.LoanDetailView.as_view(),
-        name="loan-detail",
+        name="detail",
     ),
-    path("loans/create/", views.LoanCreateView.as_view(), name="loan-create"),
+    path("create/", views.LoanCreateView.as_view(), name="create"),
     path(
-        "loans/<int:pk>/update/",
+        "<int:pk>/update/",
         views.LoanUpdateView.as_view(),
-        name="loan-update",
+        name="update",
     ),
     path(
-        "loans/<int:pk>/delete/",
+        "<int:pk>/delete/",
         views.LoanDeleteView.as_view(),
-        name="loan-delete",
+        name="delete",
     ),
     path(
-        "loans/<int:pk>/return/",
+        "<int:pk>/return/",
         views.LoanReturnView.as_view(),
-        name="loan-return",
+        name="return",
     ),
     path(
-        "loans/returned/",
+        "returned/",
         views.LoanReturnedListView.as_view(),
-        name="loan-returned-list",
+        name="returned-list",
     ),
     path(
-        "loans/<int:pk>/returned/detail/",
+        "<int:pk>/returned/detail/",
         views.LoanReturnedDetailView.as_view(),
-        name="loan-returned-detail",
+        name="returned-detail",
     ),
 ]
