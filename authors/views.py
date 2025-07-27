@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -10,10 +11,11 @@ from django.views.generic import (
 from . import forms, models
 
 
-class AuthorListView(ListView):
+class AuthorListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = models.Author
     template_name = "authors/author_list.html"
     context_object_name = "authors"
+    permission_required = "authors.view_author"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -25,26 +27,30 @@ class AuthorListView(ListView):
         return queryset
 
 
-class AuthorCreateView(CreateView):
+class AuthorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Author
     template_name = "authors/author_create.html"
     form_class = forms.AuthorForm
     success_url = reverse_lazy("author-list")
+    permission_required = "authors.add_author"
 
 
-class AuthorDetailView(DetailView):
+class AuthorDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = models.Author
     template_name = "authors/author_detail.html"
+    permission_required = "authors.view_author"
 
 
-class AuthorUpdateView(UpdateView):
+class AuthorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = models.Author
     template_name = "authors/author_update.html"
     form_class = forms.AuthorForm
     success_url = reverse_lazy("author-list")
+    permission_required = "authors.change_author"
 
 
-class AuthorDeleteView(DeleteView):
+class AuthorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = models.Author
     template_name = "authors/author_delete.html"
     success_url = reverse_lazy("author-list")
+    permission_required = "authors.delete_author"

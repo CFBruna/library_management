@@ -3,7 +3,7 @@ from django.db import models
 
 class Author(models.Model):
     name = models.CharField("Nome", max_length=250)
-    description = models.TextField("Descrição", blank=True, null=True)
+    description = models.TextField("Descrição", blank=True)
 
     class Meta:
         verbose_name = "Autor"

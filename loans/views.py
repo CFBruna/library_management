@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -11,10 +12,11 @@ from django.views.generic import (
 from . import forms, models
 
 
-class LoanListView(ListView):
+class LoanListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = models.Loan
     template_name = "loans/loan_list.html"
     context_object_name = "loans"
+    permission_required = "loans.view_loan"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -31,16 +33,18 @@ class LoanListView(ListView):
         return queryset
 
 
-class LoanDetailView(DetailView):
+class LoanDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = models.Loan
     template_name = "loans/loan_detail.html"
+    permission_required = "loans.view_loan"
 
 
-class LoanCreateView(CreateView):
+class LoanCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Loan
     template_name = "loans/loan_create.html"
     form_class = forms.LoanForm
     success_url = reverse_lazy("loan-list")
+    permission_required = "loans.add_loan"
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -48,11 +52,12 @@ class LoanCreateView(CreateView):
         return form
 
 
-class LoanUpdateView(UpdateView):
+class LoanUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = models.Loan
     template_name = "loans/loan_update.html"
     form_class = forms.LoanForm
     success_url = reverse_lazy("loan-list")
+    permission_required = "loans.change_loan"
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -60,21 +65,23 @@ class LoanUpdateView(UpdateView):
         return form
 
 
-class LoanDeleteView(DeleteView):
+class LoanDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = models.Loan
     template_name = "loans/loan_delete.html"
     success_url = reverse_lazy("loan-list")
+    permission_required = "loans.delete_loan"
 
 
-class LoanReturnView(UpdateView):
+class LoanReturnView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = models.Loan
     template_name = "loans/loan_return.html"
     form_class = forms.LoanForm
     success_url = reverse_lazy("loan-list")
+    permission_required = "loans.view_loan"
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        for field in ["book", "patron", "due_date", "is_returned"]:
+        for field in ["patron", "due_date", "is_returned"]:
             form.fields.pop(field)
         return form
 
@@ -85,10 +92,11 @@ class LoanReturnView(UpdateView):
         return super().form_valid(form)
 
 
-class LoanReturnedListView(ListView):
+class LoanReturnedListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = models.Loan
     template_name = "loans/loan_returned_list.html"
     context_object_name = "loans"
+    permission_required = "loans.view_loan"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -97,7 +105,7 @@ class LoanReturnedListView(ListView):
 
         if search:
             queryset = queryset.filter(
-                Q(book__title__icontains=search)
+                Q(loan__title__icontains=search)
                 | Q(patron__name__icontains=search)
                 | Q(patron__cpf__icontains=search)
             )
@@ -105,6 +113,7 @@ class LoanReturnedListView(ListView):
         return queryset
 
 
-class LoanReturnedDetailView(DetailView):
+class LoanReturnedDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = models.Loan
     template_name = "loans/loan_returned_detail.html"
+    permission_required = "loans.view_loan"

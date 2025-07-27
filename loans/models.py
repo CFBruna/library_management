@@ -22,7 +22,16 @@ class Loan(models.Model):
     due_date = models.DateTimeField("Data prevista para devolução")
     is_returned = models.BooleanField("Devolvido?", default=False)
     return_date = models.DateTimeField("Data da devolução", blank=True, null=True)
-    notes = models.TextField("Observações", blank=True, null=True)
+    notes = models.TextField("Observações", blank=True)
+
+    class Meta:
+        verbose_name = "Empréstimo"
+        verbose_name_plural = "Empréstimos"
+
+    def __str__(self):
+        return f'Empréstimo de "{self.book}" para {self.patron.name} em {
+            self.loan_date.strftime("%d/%m/%Y")
+        }'
 
     def save(self, *args, **kwargs):
         if self.pk:
@@ -50,10 +59,3 @@ class Loan(models.Model):
             if self.book.quantity > 0:
                 self.book.quantity -= 1
                 self.book.save()
-
-    class Meta:
-        verbose_name = "Empréstimo"
-        verbose_name_plural = "Empréstimos"
-
-    def __str__(self):
-        return f'Empréstimo de "{self.book}" para {self.patron.name} em {self.loan_date.strftime("%d/%m/%Y")}'

@@ -20,8 +20,8 @@ class Patron(models.Model):
     cpf = models.CharField(
         "CPF", max_length=11, unique=True, validators=[cpf_validator]
     )
-    address = models.TextField("Endereço", blank=True, null=True)
-    description = models.TextField("Descrição", blank=True, null=True)
+    address = models.TextField("Endereço", blank=True)
+    description = models.TextField("Descrição", blank=True)
 
     class Meta:
         verbose_name = "Leitor"
