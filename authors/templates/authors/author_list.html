@@ -19,9 +19,11 @@ Autores
     </div>
 
     <div class="col-md-6">
-    <a href="{% url 'authors:create' %}" class="btn btn-success float-end">
-        <i class="bi bi-plus"></i> Novo(a) Autor(a)
-    </a>
+    {% if perms.authors.add_author %}
+      <a href="{% url 'authors:create' %}" class="btn btn-success float-end">
+          <i class="bi bi-plus"></i> Novo(a) Autor(a)
+      </a>
+    {% endif %}
     </div>
 
 </div>
@@ -45,15 +47,21 @@ Autores
                     <td>{{ author.name }}</td>
                     <td>{{ author.description }}</td>
                     <td>
+                          {% if perms.authors.view_author %}
                             <a href="{% url 'authors:detail' author.id %}" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
+                          {% endif %}
+                          {% if perms.authors.change_author %}
                              <a href="{% url 'authors:update' author.id %}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
+                          {% endif %}
+                          {% if perms.authors.delete_author %}
                             <a href="{% url 'authors:delete' author.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash3"></i>
                             </a>
+                          {% endif %}
                         
                     </td>
                 </tr>

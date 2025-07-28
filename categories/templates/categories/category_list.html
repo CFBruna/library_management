@@ -19,9 +19,11 @@ Categorias
     </div>
 
     <div class="col-md-6">
-    <a href="{% url 'categories:create' %}" class="btn btn-success float-end">
-        <i class="bi bi-plus"></i> Nova Categoria
-    </a>
+        {% if perms.categories.add_category %}
+          <a href="{% url 'categories:create' %}" class="btn btn-success float-end">
+             <i class="bi bi-plus"></i> Nova Categoria
+          </a>
+        {% endif %}
     </div>
 
 </div>
@@ -45,15 +47,21 @@ Categorias
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
                     <td>
+                          {% if perms.categories.view_category %}
                             <a href="{% url 'categories:detail' category.id %}" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
+                          {% endif %}
+                          {% if perms.categories.change_category %}
                              <a href="{% url 'categories:update' category.id %}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
+                          {% endif %}
+                          {% if perms.categories.delete_category %}
                             <a href="{% url 'categories:delete' category.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash3"></i>
                             </a>
+                          {% endif %}
                         
                     </td>
                 </tr>

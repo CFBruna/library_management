@@ -427,26 +427,36 @@
             </a>
 
             <nav class="nav-desktop">
-                <a href="{% url 'books:list' %}" class="nav-link" data-page="books">
-                    <i class="bi bi-book"></i>
-                    <span>Livros</span>
-                </a>
-                <a href="{% url 'authors:list' %}" class="nav-link" data-page="authors">
-                    <i class="bi bi-person-badge"></i>
-                    <span>Autores</span>
-                </a>
-                <a href="{% url 'categories:list' %}" class="nav-link" data-page="categories">
-                    <i class="bi bi-tags"></i>
-                    <span>Categorias</span>
-                </a>
-                <a href="{% url 'patrons:list' %}" class="nav-link" data-page="patrons">
-                    <i class="bi bi-people"></i>
-                    <span>Leitores</span>
-                </a>
-                <a href="{% url 'loans:list' %}" class="nav-link" data-page="loans">
-                    <i class="bi bi-arrow-left-right"></i>
-                    <span>Empréstimos</span>
-                </a>
+                {% if perms.books.view_book %}
+                    <a href="{% url 'books:list' %}" class="nav-link" data-page="books">
+                        <i class="bi bi-book"></i>
+                        <span>Livros</span>
+                    </a>
+                {% endif %}
+                {% if perms.authors.view_author %}
+                    <a href="{% url 'authors:list' %}" class="nav-link" data-page="authors">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Autores</span>
+                    </a>
+                {% endif %}
+                {% if perms.categories.view_category %}
+                    <a href="{% url 'categories:list' %}" class="nav-link" data-page="categories">
+                        <i class="bi bi-tags"></i>
+                        <span>Categorias</span>
+                    </a>
+                {% endif %}
+                {% if perms.patrons.view_patron %}
+                    <a href="{% url 'patrons:list' %}" class="nav-link" data-page="patrons">
+                        <i class="bi bi-people"></i>
+                        <span>Leitores</span>
+                    </a>
+                {% endif %}
+                {% if perms.loans.view_loan %}
+                    <a href="{% url 'loans:list' %}" class="nav-link" data-page="loans">
+                        <i class="bi bi-arrow-left-right"></i>
+                        <span>Empréstimos</span>
+                    </a>
+                {% endif %}
             </nav>
 
             <div class="d-flex align-items-center gap-3">
@@ -489,32 +499,42 @@
             <div class="mobile-nav-section">
                 <div class="mobile-nav-title">Catálogo</div>
                 <div class="mobile-nav-links">
-                    <a href="{% url 'books:list' %}" class="mobile-nav-link" data-page="books">
-                        <i class="bi bi-book"></i>
-                        <span>Livros</span>
-                    </a>
-                    <a href="{% url 'authors:list' %}" class="mobile-nav-link" data-page="authors">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Autores</span>
-                    </a>
-                    <a href="{% url 'categories:list' %}" class="mobile-nav-link" data-page="categories">
-                        <i class="bi bi-tags"></i>
-                        <span>Categorias</span>
-                    </a>
+                    {% if perms.books.view_book %}
+                        <a href="{% url 'books:list' %}" class="mobile-nav-link" data-page="books">
+                            <i class="bi bi-book"></i>
+                            <span>Livros</span>
+                        </a>
+                    {% endif %}
+                    {% if perms.authors.view_author %}
+                        <a href="{% url 'authors:list' %}" class="mobile-nav-link" data-page="authors">
+                            <i class="bi bi-person-badge"></i>
+                            <span>Autores</span>
+                        </a>
+                    {% endif %}
+                    {% if perms.categories.view_category %}
+                        <a href="{% url 'categories:list' %}" class="mobile-nav-link" data-page="categories">
+                            <i class="bi bi-tags"></i>
+                            <span>Categorias</span>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
             
             <div class="mobile-nav-section">
                 <div class="mobile-nav-title">Gerenciamento</div>
                 <div class="mobile-nav-links">
-                    <a href="{% url 'patrons:list' %}" class="mobile-nav-link" data-page="patrons">
-                        <i class="bi bi-people"></i>
-                        <span>Leitores</span>
-                    </a>
-                    <a href="{% url 'loans:list' %}" class="mobile-nav-link" data-page="loans">
-                        <i class="bi bi-arrow-left-right"></i>
-                        <span>Empréstimos</span>
-                    </a>
+                    {% if perms.patrons.view_patron %}
+                        <a href="{% url 'patrons:list' %}" class="mobile-nav-link" data-page="patrons">
+                            <i class="bi bi-people"></i>
+                            <span>Leitores</span>
+                        </a>
+                    {% endif %}
+                    {% if perms.loans.view_loan %}
+                        <a href="{% url 'loans:list' %}" class="mobile-nav-link" data-page="loans">
+                            <i class="bi bi-arrow-left-right"></i>
+                            <span>Empréstimos</span>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </nav>

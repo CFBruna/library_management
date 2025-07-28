@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 ]
 
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "book-list"
+LOGIN_REDIRECT_URL = "books:list"
 
 LOGOUT_REDIRECT_URL = "/"
 

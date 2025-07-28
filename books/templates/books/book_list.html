@@ -19,9 +19,11 @@ Livros
     </div>
 
     <div class="col-md-6">
-    <a href="{% url 'books:create' %}" class="btn btn-success float-end">
-        <i class="bi bi-plus"></i> Novo Livro
-    </a>
+        {% if perms.books.add_book %}
+            <a href="{% url 'books:create' %}" class="btn btn-success float-end">
+                <i class="bi bi-plus"></i> Novo Livro
+            </a>
+        {% endif %}
     </div>
 
 </div>
@@ -47,15 +49,21 @@ Livros
                     <td>{{ book.isbn }}</td>
                     <td>{{ book.quantity }}</td>
                     <td>
-                            <a href="{% url 'books:detail' book.id %}" class="btn btn-info btn-sm">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                             <a href="{% url 'books:update' book.id %}" class="btn btn-warning btn-sm">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            <a href="{% url 'books:delete' book.id %}" class="btn btn-danger btn-sm">
-                                <i class="bi bi-trash3"></i>
-                            </a>
+                            {% if perms.books.view_book %}
+                              <a href="{% url 'books:detail' book.id %}" class="btn btn-info btn-sm">
+                                  <i class="bi bi-eye"></i>
+                              </a>
+                            {% endif %}
+                            {% if perms.books.change_book %}
+                              <a href="{% url 'books:update' book.id %}" class="btn btn-warning btn-sm">
+                                  <i class="bi bi-pencil"></i>
+                              </a>
+                            {% endif %}
+                            {% if perms.books.delete_book %}
+                              <a href="{% url 'books:delete' book.id %}" class="btn btn-danger btn-sm">
+                                  <i class="bi bi-trash3"></i>
+                              </a>
+                            {% endif %}
                         
                     </td>
                 </tr>
