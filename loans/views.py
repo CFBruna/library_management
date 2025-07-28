@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -39,12 +41,15 @@ class LoanDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "loans.view_loan"
 
 
-class LoanCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class LoanCreateView(
+    LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView
+):
     model = models.Loan
     template_name = "loans/loan_create.html"
     form_class = forms.LoanForm
     success_url = reverse_lazy("loans:list")
     permission_required = "loans.add_loan"
+    success_message = "Empréstimo cadastrado com sucesso."
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -52,12 +57,15 @@ class LoanCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return form
 
 
-class LoanUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class LoanUpdateView(
+    LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView
+):
     model = models.Loan
     template_name = "loans/loan_update.html"
     form_class = forms.LoanForm
     success_url = reverse_lazy("loans:list")
     permission_required = "loans.change_loan"
+    success_message = "Empréstimo atualizado com sucesso."
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -70,6 +78,13 @@ class LoanDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = "loans/loan_delete.html"
     success_url = reverse_lazy("loans:list")
     permission_required = "loans.delete_loan"
+
+    def form_valid(self, form):
+        messages.success(
+            self.request,
+            f"O empréstimo para '{self.object.patron.name}' foi deletado com sucesso.",
+        )
+        return super().form_valid(form)
 
 
 class LoanReturnView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -89,6 +104,10 @@ class LoanReturnView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         self.object = form.save(commit=False)
         self.object.is_returned = True
         self.object.save()
+        messages.success(
+            self.request,
+            f"O livro '{self.object.book.title}' foi devolvido com sucesso.",
+        )
         return super().form_valid(form)
 
 

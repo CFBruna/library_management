@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -36,20 +38,26 @@ class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "books.view_book"
 
 
-class BookCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class BookCreateView(
+    LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView
+):
     model = models.Book
     template_name = "books/book_create.html"
     form_class = forms.BookForm
     success_url = reverse_lazy("books:list")
     permission_required = "books.add_book"
+    success_message = "Livro cadastrado com sucesso."
 
 
-class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class BookUpdateView(
+    LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView
+):
     model = models.Book
     template_name = "books/book_update.html"
     form_class = forms.BookForm
     success_url = reverse_lazy("books:list")
     permission_required = "books.change_book"
+    success_message = "Livro atualizado com sucesso."
 
 
 class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -57,3 +65,9 @@ class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = "books/book_delete.html"
     success_url = reverse_lazy("books:list")
     permission_required = "books.delete_book"
+
+    def form_valid(self, form):
+        messages.success(
+            self.request, f"O livro '{self.object.title}' foi deletado com sucesso."
+        )
+        return super().form_valid(form)

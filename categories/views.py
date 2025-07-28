@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -33,20 +35,26 @@ class CategoryDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView
     permission_required = "categories.view_category"
 
 
-class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class CategoryCreateView(
+    LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView
+):
     model = models.Category
     template_name = "categories/category_create.html"
     form_class = forms.CategoryForm
     success_url = reverse_lazy("categories:list")
     permission_required = "categories.add_category"
+    success_message = "Categoria cadastrada com sucesso."
 
 
-class CategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class CategoryUpdateView(
+    LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView
+):
     model = models.Category
     template_name = "categories/category_update.html"
     form_class = forms.CategoryForm
     success_url = reverse_lazy("categories:list")
     permission_required = "categories.change_category"
+    success_message = "Categoria atualizada com sucesso."
 
 
 class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -54,3 +62,9 @@ class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView
     template_name = "categories/category_delete.html"
     success_url = reverse_lazy("categories:list")
     permission_required = "categories.delete_category"
+
+    def form_valid(self, form):
+        messages.success(
+            self.request, f"A categoria '{self.object.name}' foi deletada com sucesso."
+        )
+        return super().form_valid(form)
