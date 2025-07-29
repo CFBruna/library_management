@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Q
+from django.db.models import ProtectedError, Q
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -23,12 +24,10 @@ class BookListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search = self.request.GET.get("q")
-
         if search:
             queryset = queryset.filter(
                 Q(title__icontains=search) | Q(isbn__icontains=search)
             )
-
         return queryset
 
 
@@ -66,8 +65,17 @@ class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("books:list")
     permission_required = "books.delete_book"
 
-    def form_valid(self, form):
-        messages.success(
-            self.request, f"O livro '{self.object.title}' foi deletado com sucesso."
-        )
-        return super().form_valid(form)
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try:
+            response = super().delete(request, *args, **kwargs)
+            messages.success(
+                self.request, f'O livro "{self.object.title}" foi removido com sucesso.'
+            )
+            return response
+        except ProtectedError:
+            messages.error(
+                self.request,
+                f'O livro "{self.object.title}" não pode ser removido, pois possui empréstimos ativos.',
+            )
+            return redirect("books:list")

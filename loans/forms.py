@@ -39,9 +39,8 @@ class LoanForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         book = cleaned_data.get("book")
-        is_returned = cleaned_data.get("is_returned", False)
 
-        if book and not is_returned:
+        if book and not self.instance.pk:
             if book.quantity < 1:
                 raise ValidationError(
                     "Não há exemplares disponíveis para empréstimo deste livro."

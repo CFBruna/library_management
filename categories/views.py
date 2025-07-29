@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import ProtectedError
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -63,8 +65,18 @@ class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView
     success_url = reverse_lazy("categories:list")
     permission_required = "categories.delete_category"
 
-    def form_valid(self, form):
-        messages.success(
-            self.request, f"A categoria '{self.object.name}' foi deletada com sucesso."
-        )
-        return super().form_valid(form)
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try:
+            self.object.delete()
+            messages.success(
+                self.request,
+                f"A categoria '{self.object.name}' foi deletada com sucesso.",
+            )
+            return redirect(self.success_url)
+        except ProtectedError:
+            messages.error(
+                self.request,
+                f"A categoria '{self.object.name}' não pode ser deletada, pois está sendo referenciada por um ou mais livros.",
+            )
+            return redirect(self.success_url)

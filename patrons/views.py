@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Q
+from django.db.models import ProtectedError, Q
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -66,9 +67,18 @@ class PatronDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("patrons:list")
     permission_required = "patrons.delete_patron"
 
-    def form_valid(self, form):
-        messages.success(
-            self.request,
-            f"O(A) leitor(a) '{self.object.name}' foi deletado(a) com sucesso.",
-        )
-        return super().form_valid(form)
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try:
+            self.object.delete()
+            messages.success(
+                self.request,
+                f"O(A) leitor(a) '{self.object.name}' foi deletado(a) com sucesso.",
+            )
+            return redirect(self.success_url)
+        except ProtectedError:
+            messages.error(
+                self.request,
+                f"O(A) leitor(a) '{self.object.name}' não pode ser deletado(a), pois está associado(a) a um ou mais empréstimos.",
+            )
+            return redirect(self.success_url)
