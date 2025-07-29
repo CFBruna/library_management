@@ -31,8 +31,8 @@ O projeto é containerizado com Docker, facilitando a configuração do ambiente
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
-    cd seu-repositorio
+    git clone [https://github.com/CFBruna/library_management.git](https://github.com/CFBruna/library_management.git)
+    cd library_management
     ```
 
 2.  **Configure as variáveis de ambiente:**
