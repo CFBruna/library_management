@@ -124,7 +124,7 @@ class LoanReturnedListView(LoginRequiredMixin, PermissionRequiredMixin, ListView
 
         if search:
             queryset = queryset.filter(
-                Q(loan__title__icontains=search)
+                Q(book__title__icontains=search)
                 | Q(patron__name__icontains=search)
                 | Q(patron__cpf__icontains=search)
             )
