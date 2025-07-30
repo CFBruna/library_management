@@ -24,6 +24,8 @@ O objetivo foi construir uma aplicação web completa e funcional, aplicando os 
 * **Banco de Dados:** PostgreSQL (configurado para rodar com Docker)
 * **Testes:** Pytest, Pytest-Django
 * **Containerização:** Docker, Docker Compose
+  
+[▶️ Clique aqui para ver a demonstração em vídeo](https://youtu.be/Tbng-8h86uc)
 
 ## Como Executar o Projeto Localmente
 
