@@ -1,62 +1,62 @@
-# Sistema de Gerenciamento de Biblioteca
+# Library Management System
 
-## Sobre o Projeto
+## About the Project
 
-Este é um projeto de um Sistema de Gerenciamento de Biblioteca desenvolvido com Django. A plataforma permite gerenciar de forma completa o acervo de livros, autores, categorias, leitores e o controle de empréstimos, tudo isso com um sistema de autenticação e permissões robusto.
+This is a Library Management System project developed with Django. The platform allows comprehensive management of books, authors, categories, patrons, and loan control, all with a robust authentication and permissions system.
 
-O objetivo foi construir uma aplicação web completa e funcional, aplicando os conceitos que aprendi em minha jornada com Python e Django, e ao mesmo tempo, explorar ferramentas modernas para otimizar o ciclo de desenvolvimento.
+The goal was to build a complete and functional web application, applying concepts learned in my journey with Python and Django, while exploring modern tools to optimize the development cycle.
 
-## Principais Funcionalidades
+## Main Features
 
-* **Gestão de Catálogo:** CRUD completo para Livros, Autores e Categorias.
-* **Controle de Leitores:** Cadastro e gerenciamento de informações dos leitores (patrons).
-* **Sistema de Empréstimos:**
-    * Registro de novos empréstimos, com atualização automática do estoque de livros.
-    * Registro de devoluções.
-    * Listagem separada de empréstimos ativos e já devolvidos.
-    * Busca inteligente por livro, leitor ou CPF.
-* **Autenticação e Permissões:** O sistema utiliza o sistema de autenticação e permissões do Django para controlar o acesso a diferentes funcionalidades, garantindo que apenas usuários autorizados possam realizar determinadas ações.
+* **Catalog Management:** Complete CRUD for Books, Authors, and Categories.
+* **Patron Control:** Registration and management of patron information.
+* **Loan System:**
+    * New loan registration with automatic book inventory updates.
+    * Return registration.
+    * Separate listings for active and returned loans.
+    * Smart search by book, patron name, or CPF (Brazilian ID).
+* **Authentication and Permissions:** The system uses Django's authentication and permissions system to control access to different functionalities, ensuring only authorized users can perform certain actions.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
 * **Backend:** Python, Django
 * **Frontend:** HTML, CSS, Bootstrap 5
-* **Banco de Dados:** PostgreSQL (configurado para rodar com Docker)
-* **Testes:** Pytest, Pytest-Django
-* **Containerização:** Docker, Docker Compose
+* **Database:** PostgreSQL (configured to run with Docker)
+* **Testing:** Pytest, Pytest-Django
+* **Containerization:** Docker, Docker Compose
   
-[▶️ Clique aqui para ver a demonstração em vídeo](https://youtu.be/Tbng-8h86uc)
+[▶️ Click here to watch the video demonstration](https://youtu.be/Tbng-8h86uc)
 
-## Como Executar o Projeto Localmente
+## How to Run the Project Locally
 
-O projeto é containerizado com Docker, facilitando a configuração do ambiente.
+The project is containerized with Docker, making environment setup easier.
 
-1.  **Clone o repositório:**
+1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/CFBruna/library_management.git](https://github.com/CFBruna/library_management.git)
+    git clone https://github.com/CFBruna/library_management.git
     cd library_management
     ```
 
-2.  **Configure as variáveis de ambiente:**
-    * Renomeie o arquivo `.env.example` para `.env`.
-    * Se desejar, altere os valores dentro do arquivo `.env` (não é estritamente necessário para rodar localmente, mas é uma boa prática).
+2.  **Configure environment variables:**
+    * Rename the `.env.example` file to `.env`.
+    * If desired, modify the values inside the `.env` file (not strictly necessary to run locally, but it's a good practice).
 
-3.  **Suba os containers com Docker Compose:**
+3.  **Start the containers with Docker Compose:**
     ```bash
     docker-compose up --build
     ```
 
-4.  **Acesse a aplicação:**
-    * Abra seu navegador e acesse `http://localhost:8000`.
+4.  **Access the application:**
+    * Open your browser and navigate to `http://localhost:8000`.
 
-## Meu Processo de Desenvolvimento e o Papel da IA
+## My Development Process and the Role of AI
 
-Desde o início, minha meta era não apenas construir um projeto, mas também otimizar o processo. Eu fui responsável por toda a arquitetura da aplicação: desenhei os `models`, estruturei as `views` com a lógica de negócio e defini as regras de permissão.
+From the beginning, my goal was not just to build a project, but also to optimize the process. I was responsible for the entire application architecture: I designed the `models`, structured the `views` with business logic, and defined permission rules.
 
-Nesse processo, utilizei ferramentas de Inteligência Artificial como uma assistente de desenvolvimento. Em vez de gastar tempo com tarefas repetitivas, eu direcionei a IA para:
+In this process, I used Artificial Intelligence tools as a development assistant. Instead of spending time on repetitive tasks, I directed the AI to:
 
-* **Gerar os testes automatizados:** Com meu conhecimento sobre o que precisava ser testado, guiei a IA para criar os testes unitários e de integração com Pytest, o que acelerou a garantia de qualidade do código.
-* **Estruturar o frontend:** O template `base.html` e outros templates foram gerados com o auxílio da IA, seguindo as diretrizes de design que eu estabeleci.
-* **Configurar o ambiente de deploy:** Utilizei a IA para me ajudar a escrever o `Dockerfile` e o `docker-compose.yml`, com base nos requisitos do meu projeto.
+* **Generate automated tests:** With my knowledge of what needed to be tested, I guided the AI to create unit and integration tests with Pytest, which accelerated code quality assurance.
+* **Structure the frontend:** The `base.html` template and other templates were generated with AI assistance, following the design guidelines I established.
+* **Configure the deployment environment:** I used AI to help write the `Dockerfile` and `docker-compose.yml`, based on my project requirements.
 
-Acredito que a habilidade mais importante de um desenvolvedor moderno é saber traduzir uma necessidade de negócio em uma solução técnica funcional, utilizando as melhores e mais eficientes ferramentas disponíveis. Este projeto é um reflexo dessa filosofia.
+I believe that the most important skill of a modern developer is knowing how to translate a business need into a functional technical solution, using the best and most efficient tools available. This project is a reflection of that philosophy.
